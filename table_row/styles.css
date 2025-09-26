@@ -2,6 +2,36 @@ table, tr, td, th thead{
     border: 1px dotted red;
     border-collapse: collapse;
 }
-tr td:nth-last-child(3), td:nth-last-child(3){
-    background-color: green;
+tr td:nth-last-child(1), td:nth-last-child(3){
+    background-color: rgba(252, 174, 252, 0.788);
+}
+#gyakorlas{
+    background-color: rgb(158, 212, 243);
+}
+button:has(+p){
+    background-color: rgb(226, 89, 215);
+}
+button:has(+button){
+    color: rgb(223, 116, 137);
+}
+button:has(+button):hover{
+    background-color: rgb(100, 72, 98);
+}
+#gyakorlas:has(+a:hover) button{
+    color: rgb(43, 6, 255);
+}
+tr:not(:has(td[rowspan]))+tr:not(:has(td[rowspan])):hover td{
+    background-color: rgb(100, 72, 98);
+}
+tr:has(td[rowspan]):hover td{
+    background-color: blueviolet;
+}
+tr:has(td[rowspan]):hover +tr td{
+    background-color: blueviolet;
+}
+tr:has(td[rowspan]):has(+tr:hover) td{
+    background-color: rgb(134, 95, 170);
+}
+tr:has(td[rowspan])+tr:hover td{
+    background-color: brown;
 }
