@@ -2,3 +2,18 @@ table,thead,tbody,tr,td,th{
     border: 1px solid black;
     border-collapse: collapse;
 }
+thead{
+    background-color: rgb(175, 124, 66);
+}
+thead~tbody tr{
+    background-color: aquamarine;
+}
+tbody>tr{
+    background-color: bisque;
+}
+tbody>tr:nth-child(2n){
+    background-color: rgba(250, 200, 159, 0.774);
+}
+tbody tr:hover{
+    background-color: rgb(158, 134, 105);
+} 

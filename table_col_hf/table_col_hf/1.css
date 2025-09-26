@@ -19,7 +19,7 @@ tbody tr {
   background-color: yellow;
 }
 
-tbody tr:nth-child(odd) td {
+tbody tr:nth-child(2n-1) td {
   background-color: lightblue;
 }
 
