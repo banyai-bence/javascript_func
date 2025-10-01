@@ -1,0 +1,23 @@
+table, tr, td, th thead{
+    border: 1px solid rgb(82, 45, 45);
+    border-collapse: collapse;
+}
+tr td:nth-last-child(1), td:nth-last-child(3){
+    background-color: rgba(36, 11, 36, 0.788);
+}
+
+tr:not(:has(td[rowspan]))+tr:not(:has(td[rowspan])):hover td{
+    background-color: rgb(25, 209, 200);
+}
+tr:has(td[rowspan]):hover td{
+    background-color: rgb(35, 49, 179);
+}
+tr:has(td[rowspan]):hover +tr td{
+    background-color: rgb(35, 49, 179);
+}
+tr:has(td[rowspan]):has(+tr:hover) td{
+    background-color: rgb(35, 49, 179);
+}
+tr:has(td[rowspan])+tr:hover td{
+    background-color: rgb(35, 49, 179);
+}
