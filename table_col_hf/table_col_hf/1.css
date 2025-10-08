@@ -1,0 +1,29 @@
+table {
+  border-collapse: collapse;
+  width: 80%;
+  margin: 20px auto;
+  border: 2px dotted green; 
+}
+
+thead tr {
+  background-color: lightgray;
+}
+
+th, td {
+  border: 2px dotted green; 
+  padding: 8px;
+  text-align: left;
+}
+
+tbody tr {
+  background-color: yellow;
+}
+
+tbody tr:nth-child(2n-1) td {
+  background-color: lightblue;
+}
+
+tbody tr:hover {
+  color: red;           
+  font-weight: bold;    
+}

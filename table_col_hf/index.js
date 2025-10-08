@@ -73,3 +73,7 @@ for(const i of arr){
         tr2.appendChild(td4)
     }
 }
+
+
+
+
