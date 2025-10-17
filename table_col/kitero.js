@@ -122,4 +122,22 @@ for (const i of arr){
     }
 }
 
+/**
+ * 
+ * @param {string} celltype -letrehoz td,th cellatipus
+ * @param {string} cellcontent -beallitja a kontentet
+ * @param {HTMLTableRowElement} parentrow -hozzafuzunk egy sort
+ * 
+ * @returns {void}
+ */
+function createcell(celltype,cellcontent,parentrow){
+    const td = document.createElement(celltype)
+    celltype.innerText=cellcontent
+    parentrow.appendChild(celltype)
+}
+
+
+
+
+
 
