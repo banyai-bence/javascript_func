@@ -80,45 +80,33 @@ table.appendChild(thead)
 const tr =document.createElement("tr")
 thead.appendChild(tr)
 
-const th=document.createElement("th")
-tr.appendChild(th)
-
-const th2=document.createElement("th")
-tr.appendChild(th2)
-
-const th3=document.createElement("th")
-tr.appendChild(th3)
-
-th.innerText="Szerző neve"
-th2.innerText="Korszak"
-th3.innerText="Szerelmek"
+createcell("th","Szerző neve",tr)
+createcell("th","Korszak",tr)
+const th3=createcell("th","Szerelmek",tr)
 th3.colSpan=2
 
 const tbody = document.createElement("tbody")
 table.appendChild(tbody)
 for (const i of arr){
-    const tr = document.createElement("tr")
-    tbody.appendChild(tr)
+    const tr2 = document.createElement("tr")
+    tbody.appendChild(tr2)
 
-    const td = document.createElement("td")
-    td.innerText = i.nev
-    tr.appendChild(td)
+    createcell("td",i.nev,tr2)
 
-    const td2 = document.createElement("td")
-    td2.innerText = i.kor
-    tr.appendChild(td2)
+    createcell("td",i.kor,tr2)
 
-    const td3= document.createElement("td")
-    td3.innerText = i.sz1
-    tr.appendChild(td3)
+    const td3=createcell("td",i.sz1,tr2)
 
     if(i.sz2 === undefined){
         td3.colSpan=2
     }
     else{
+    /*
     const td4 = document.createElement("td")
     td4.innerText = i.sz2
     tr.appendChild(td4)
+    */
+    createcell("td",i.sz2,tr2)
     }
 }
 
@@ -128,12 +116,13 @@ for (const i of arr){
  * @param {string} cellcontent -beallitja a kontentet
  * @param {HTMLTableRowElement} parentrow -hozzafuzunk egy sort
  * 
- * @returns {void}
+ * @returns {HTMLTableCellElement} -visszater a letreozott cell elemennel
  */
 function createcell(celltype,cellcontent,parentrow){
-    const td = document.createElement(celltype)
-    celltype.innerText=cellcontent
-    parentrow.appendChild(celltype)
+    const valami1 = document.createElement(celltype)
+    valami1.innerText=cellcontent
+    parentrow.appendChild(valami1)
+    return valami1
 }
 
 
