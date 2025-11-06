@@ -126,7 +126,49 @@ function createcell(celltype,cellcontent,parentrow){
 }
 
 
+//hazi
 
+const form =document.createElement("form")
+form.id="form_js"
+document.body.appendChild(form)
 
+const h2 =document.createElement("h2")
+h2.innerText="Javascript form"
+form.appendChild(h2)
+
+LabelInput("koltoneve","Költő neve:")
+LabelInput("korszak","Korszak:")
+LabelInput("szerelme1","Szerelme:")
+LabelInput("szerelme2","Szerelme:")
+
+const button =document.createElement("button")
+button.innerText="Hozzaadas"
+form.appendChild(button)
+
+function bek(){
+    const br = document.createElement("br")
+    form.appendChild(br)
+}
+
+/**
+@param {string} kapcs
+@param {string} cimke
+*/
+
+function LabelInput(kapcs,cimke){
+    const label =document.createElement("label")
+    label.htmlFor=kapcs
+    label.innerText=cimke
+    form.appendChild(label)
+    bek();
+
+    const input = document.createElement("input")
+    input.type="text"
+    input.id=kapcs
+    input.name=kapcs
+    form.appendChild(input)
+    bek();
+    bek();
+}
 
 
