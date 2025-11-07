@@ -12,7 +12,7 @@ console.log(a)
 console.log(a["name"])
 console.log(a.name)
 
-/**@type {{nemzet:string,szerzo:string,mu:string,szerzo?:string,mu2?:string}[]} */
+/**@type {{nemzet:string,szerzo:string,mu:string,szerzo2?:string,mu2?:string}[]} */
 const arr =[
     {
         nemzet:'Orosz',
@@ -137,9 +137,51 @@ addEventListener("submit",
         /** @type {string} */
         const mu=mu2.value
 
-        /**@type {{nemzet:string,szerzo:string,mu:string,szerzo?:string,mu2?:string}} */
-        const obj={
-            
+        /**@type {{nemzet:string,szerzo:string,mu:string,szerzo2?:string,mu2?:string}} */
+        const obj={}
+        obj.nemzet=n
+        obj.szerzo=s
+        obj.mu=m
+        obj.szerzo2=sz
+        obj.mu2=mu
+
+        const h = document.getElementById("alma")
+
+        const trd = document.createElement('tr')
+        h.appendChild(trd)  
+    
+        const tdN = document.createElement('td')
+        tdN.innerText=obj.nemzet
+        trd.appendChild(tdN)
+ 
+        tdN.addEventListener('click',function (e){
+            /**@type {HTMLTableCellElement} */
+            const target=e.target
+            target.classList.add('marked')
+        })
+ 
+    
+        const tdSz = document.createElement('td')
+        tdSz.innerText=obj.szerzo
+        trd.appendChild(tdSz)
+    
+        const tdM = document.createElement('td')
+        tdM.innerText=obj.mu
+        trd.appendChild(tdM)
+    
+        if(obj.szerzo2 !== "" && obj.mu2 !== ""){
+            tdN.rowSpan=2
+ 
+            const tr = document.createElement('tr')
+            h.appendChild(tr)
+ 
+            const tdSz2 = document.createElement('td')
+            tdSz2.innerText=obj.szerzo2
+            tr.appendChild(tdSz2)
+
+            const tdM2 = document.createElement('td')
+            tdM2.innerText=obj.mu2
+            tr.appendChild(tdM2)
         }
     }
 )
