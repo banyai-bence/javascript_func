@@ -52,147 +52,57 @@ generateHeader(table,["Nemzetiseg","Szerzo","Mu"])
  
 const tbody1 = document.createElement('tbody')
 table.appendChild(tbody1)
- 
+tbody1.id='tabbody'
 
-for(const k of arr0){
-   
-    const trd = document.createElement('tr')
-    tbody1.appendChild(trd)  
-    
-    const tdN = document.createElement('td')
-    tdN.innerText=k.nemzet
-    trd.appendChild(tdN)
- 
-    tdN.addEventListener('click',function (e){
-        
- 
-    })
- 
-    
-    const tdSz = document.createElement('td')
-    tdSz.innerText=k.szerzo
-    trd.appendChild(tdSz)
-    
-    const tdM = document.createElement('td')
-    tdM.innerText=k.mu
-    trd.appendChild(tdM)
-    
-    if(k.szerzo2 !== undefined && k.mu2 !== undefined){
-        tdN.rowSpan=2
- 
-        const tr = document.createElement('tr')
-        tbody1.appendChild(tr)
- 
-        const tdSz2 = document.createElement('td')
-        tdSz2.innerText=k.szerzo2
-        tr.appendChild(tdSz2)
+renderTableBody(arr0)
 
-        const tdM2 = document.createElement('td')
-        tdM2.innerText=k.mu2
-        tr.appendChild(tdM2)
-    }
-}
+const htmlform=document.getElementById('form')
 
-
-//----------------orai+hf--------------------------------------
-//-------------------------------------------------------------
-const tbody= document.createElement("tbody")
-
-
-renderTableRow(arr,obj)
-
-// /**@type {CountryWriters[]} */
-// const arr =[]
-
-
-// /** @param {CountryWriters} array */
-// function renderTableBody(arr){
-//     tbody.id='tabbody'
-//     const tabBody= document.getElementById('tabbody')
-//     tabBody.innerHTML=''
-
-// for(const k of arr){
-   
-//     const trd = document.createElement('tr')
-//     tabBody.appendChild(trd)  
-    
-//     const tdN = document.createElement('td')
-//     tdN.innerText=k.nemzet
-//     trd.appendChild(tdN)
- 
-//     tdN.addEventListener('click',function (e){
-//         /**@type {HTMLTableCellElement} */
-//         const target=e.target
-//         const tr= target.parentElement
-//         const tbody= tr.parentElement
-//         const results=tbody.querySelector(".marked")
-
-//         if(results){
-//             results.classList.remove('marked')
-//         }
-
-//         target.classList.add('marked')
-//     })
- 
-    
-//     const tdSz = document.createElement('td')
-//     tdSz.innerText=k.szerzo
-//     trd.appendChild(tdSz)
-    
-//     const tdM = document.createElement('td')
-//     tdM.innerText=k.mu
-//     trd.appendChild(tdM)
-    
-//     if(k.szerzo2 !== "" && k.mu2 !== ""){
-//         tdN.rowSpan=2
- 
-//         const tr = document.createElement('tr')
-//         tabBody.appendChild(tr)
- 
-//         const tdSz2 = document.createElement('td')
-//         tdSz2.innerText=k.szerzo2
-//         tr.appendChild(tdSz2)
-
-//         const tdM2 = document.createElement('td')
-//         tdM2.innerText=k.mu2
-//         tr.appendChild(tdM2)
-//     }
-// }
-// }
-//---------------------------------------------------------------------
 
 /** @type {HTMLFormElement} */
-const jsform=document.getElementById("jsform")
+const jsform=document.createElement("form")
+jsform.id="jsform"
+document.body.appendChild(jsform)
+
+createFormElement(jsform,"Nemzetiség:","jsnemzetiseg")
+createFormElement(jsform,"Szerző:","jsszerzo1")
+createFormElement(jsform,"Mű:","jsmu1")
+createFormElement(jsform,"Másik Szerző:","jsszerzo2")
+createFormElement(jsform,"Mű:","jsmu2")
+
+const button=document.createElement("button")
+button.innerText="hozzáadás"
+jsform.appendChild(button)
+
+htmlform.addEventListener("submit", htmlEventListener)
+
 
 jsform.addEventListener("submit", 
     function (e){
         e.preventDefault()
-
         /** @type {HTMLFormElement} */
         const targetdefault= e.target
         
         /** @type {HTMLInputElement} */   
-        const nemz=targetdefault.querySelector("#nemzetiseg")
+        const nemz=targetdefault.querySelector("#jsnemzetiseg")
+        /** @type {HTMLInputElement} */
+        const sz1=targetdefault.querySelector("#jsszerzo1")
+        /** @type {HTMLInputElement} */
+        const mu1=targetdefault.querySelector("#jsmu1")
+        /** @type {HTMLInputElement} */
+        const sz2=targetdefault.querySelector("#jsszerzo2")
+        /** @type {HTMLInputElement} */
+        const mu2=targetdefault.querySelector("#jsmu2")
+
+
         /** @type {string} */
         const n=nemz.value
-
-        /** @type {HTMLInputElement} */
-        const sz1=targetdefault.querySelector("#szerzo1")
         /** @type {string} */
         const s=sz1.value
-
-        /** @type {HTMLInputElement} */
-        const mu1=targetdefault.querySelector("#mu1")
         /** @type {string} */
         const m=mu1.value
-
-        /** @type {HTMLInputElement} */
-        const sz2=targetdefault.querySelector("#szerzo2")
         /** @type {string} */
         const sz=sz2.value
-
-        /** @type {HTMLInputElement} */
-        const mu2=targetdefault.querySelector("#mu2")
         /** @type {string} */
         const mu=mu2.value
 
@@ -204,124 +114,10 @@ jsform.addEventListener("submit",
         obj.szerzo2=sz
         obj.mu2=mu
 
-        arr.push(obj);
-        renderTableBody(arr);
-    }
-)
-renderTableBody(arr);
+        arr0.push(obj);
+        renderTableBody(arr0);
+})
 
 
 
-/**
- * @param {HTMLSelectElement} tablebody 
- * @param {CountryWriters} writerRow
- */
-function renderTableRow(tablebody,writerRow){
-    const trd = document.createElement('tr')
-    tablebody.appendChild(trd) 
-    tdN=createTableCell("td",writerRow.nemzet,trd)
-    createTableCell("td",writerRow.nemzet,trd)
-     
- 
-    tdN.addEventListener('click',htmlEventListener)
 
-    
-
-    createTableCell("td",writerRow.szerzo,trd)
-    
-    createTableCell("td",writerRow.mu,trd)
-    
-    if(writerRow.szerzo2 !== "" && writerRow.mu2 !== ""){
-        tdN.rowSpan=2
- 
-        const tr = document.createElement('tr')
-        tablebody.appendChild(tr)
- 
-        createTableCell("td",writerRow.szerzo2,tr)
-
-        createTableCell("td",writerRow.mu2,tr)
-    }
-}
-
-/**
- * letrehozunk egy cellat a celltype alapjan
- * beallitjuk az innertextjet
- * appendeljuk a parentrowhoz
- * visszaterunk a cellaval
- * 
- * @param {"th"|"td"} cellType 
- * @param {string} cellContent 
- * @param {HTMLTableRowElement} parentRow 
- */
-function createTableCell(cellType,cellContent,parentRow){
-    const cella= document.createElement(cellType)
-    cella.innerText=cellContent
-    parentRow.appendChild(cella)
-    return cella
-}
-
-/**
- * letrehozunk egy theadet
- * hozzacsat table
- * letrehozunk egy sort
- * hozzacsat thead
- * vegigiteralunk 2 parametert
- * letrehozzuk a fejlec cellakat
- * 
- * @param {HTMLTableElement} table 
- * @param {string[]} headerList 
- */
-function generateHeader(table,headerList){
-    const thead=document.createElement("thead")
-    table.appendChild(thead)
-
-    const tr= document.createElement("tr")
-    thead.appendChild(tr)
-
-    for(const i of headerList){
-        createTableCell("th",i,tr)
-    }
-}
-
-function htmlEventListener(e){
-    e.preventDefault()
-
-        /** @type {HTMLFormElement} */
-        const targetdefault= e.target
-        
-        /** @type {HTMLInputElement} */   
-        const nemz=targetdefault.querySelector("#nemzetiseg")
-        /** @type {string} */
-        const n=nemz.value
-
-        /** @type {HTMLInputElement} */
-        const sz1=targetdefault.querySelector("#szerzo1")
-        /** @type {string} */
-        const s=sz1.value
-
-        /** @type {HTMLInputElement} */
-        const mu1=targetdefault.querySelector("#mu1")
-        /** @type {string} */
-        const m=mu1.value
-
-        /** @type {HTMLInputElement} */
-        const sz2=targetdefault.querySelector("#szerzo2")
-        /** @type {string} */
-        const sz=sz2.value
-
-        /** @type {HTMLInputElement} */
-        const mu2=targetdefault.querySelector("#mu2")
-        /** @type {string} */
-        const mu=mu2.value
-
-        /** @type {CountryWriters} */
-        const obj={}          
-        obj.nemzet=n
-        obj.szerzo=s
-        obj.mu=m
-        obj.szerzo2=sz
-        obj.mu2=mu
-
-        arr.push(obj);
-        renderTableBody(arr);
-}

@@ -1,130 +1,53 @@
 /** @param {CountryWriters} array */
 function renderTableBody(arr){
-    tbody.id='tabbody'
     const tabBody= document.getElementById('tabbody')
     tabBody.innerHTML=''
 
 for(const k of arr){
    
-    const trd = document.createElement('tr')
-    tabBody.appendChild(trd)  
-    
-    const tdN = document.createElement('td')
-    tdN.innerText=k.nemzet
-    trd.appendChild(tdN)
- 
-    tdN.addEventListener('click',function (e){
-        /**@type {HTMLTableCellElement} */
-        const target=e.target
-        const tr= target.parentElement
-        const tbody= tr.parentElement
-        const results=tbody.querySelector(".marked")
-
-        if(results){
-            results.classList.remove('marked')
-        }
-
-        target.classList.add('marked')
-    })
- 
-    
-    const tdSz = document.createElement('td')
-    tdSz.innerText=k.szerzo
-    trd.appendChild(tdSz)
-    
-    const tdM = document.createElement('td')
-    tdM.innerText=k.mu
-    trd.appendChild(tdM)
-    
-    if(k.szerzo2 !== "" && k.mu2 !== ""){
-        tdN.rowSpan=2
- 
-        const tr = document.createElement('tr')
-        tabBody.appendChild(tr)
- 
-        const tdSz2 = document.createElement('td')
-        tdSz2.innerText=k.szerzo2
-        tr.appendChild(tdSz2)
-
-        const tdM2 = document.createElement('td')
-        tdM2.innerText=k.mu2
-        tr.appendChild(tdM2)
-    }
+    renderTableRow(tabBody,k)
 }
 }
 
-/** @type {HTMLFormElement} */
-const jsform=document.getElementById("jsform")
-
-jsform.addEventListener("submit", 
-    function (e){
-        e.preventDefault()
-
-        /** @type {HTMLFormElement} */
-        const targetdefault= e.target
-        
-        /** @type {HTMLInputElement} */   
-        const nemz=targetdefault.querySelector("#nemzetiseg")
-        /** @type {string} */
-        const n=nemz.value
-
-        /** @type {HTMLInputElement} */
-        const sz1=targetdefault.querySelector("#szerzo1")
-        /** @type {string} */
-        const s=sz1.value
-
-        /** @type {HTMLInputElement} */
-        const mu1=targetdefault.querySelector("#mu1")
-        /** @type {string} */
-        const m=mu1.value
-
-        /** @type {HTMLInputElement} */
-        const sz2=targetdefault.querySelector("#szerzo2")
-        /** @type {string} */
-        const sz=sz2.value
-
-        /** @type {HTMLInputElement} */
-        const mu2=targetdefault.querySelector("#mu2")
-        /** @type {string} */
-        const mu=mu2.value
-
-        /** @type {CountryWriters} */
-        const obj={}          
-        obj.nemzet=n
-        obj.szerzo=s
-        obj.mu=m
-        obj.szerzo2=sz
-        obj.mu2=mu
-
-        arr.push(obj);
-        renderTableBody(arr);
-    }
-)
-renderTableBody(arr);
-
+/**
+ * 
+ * @param {HTMLElement} parent 
+ */
 function createBr(parent){
     const br=document.createElement("br")
     parent.appendChild(br)
 }
 
+/**
+ * 
+ * @param {HTMLFormElement} form 
+ * @param {string} labeltxt 
+ * @param {string} id 
+ */
 function createFormElement(form,labeltxt,id){
+    const div= document.createElement("div")
+    form.appendChild(div)
+
     const label=document.createElement("label")
-    label.innerText=id
-    form.appendChild(labeltxt)
+    label.htmlFor=id
+    label.innerText=labeltxt
+    div.appendChild(label)
 
     createBr(div)
 
     const input=document.createElement("input")
-    input.type="test"
-    label.id=id
-    form.appendChild(input)
-
-    createBr(div)
-    createBr(div)
+    input.type="text"
+    input.id=id
+    input.name=id
+    div.appendChild(input)
 
     const span=document.createElement("span")
     span.classList.add("error")
-    span.appendChild(div)
+
+    createBr(div)
+    createBr(div)
+
+    div.appendChild(span)
 
 }
 
@@ -135,11 +58,22 @@ function createFormElement(form,labeltxt,id){
 function renderTableRow(tablebody,writerRow){
     const trd = document.createElement('tr')
     tablebody.appendChild(trd) 
+
     tdN=createTableCell("td",writerRow.nemzet,trd)
-    createTableCell("td",writerRow.nemzet,trd)
-     
  
-    tdN.addEventListener('click',htmlEventListener)
+    tdN.addEventListener('click',function (e){
+        /**@type {HTMLTableCellElement} */
+        const target=e.target
+        target.classList.add('marked')
+
+        const ba =target.parentElement.parentElement
+
+        const result =ba.querySelector('marked')
+
+        if(result){
+            result.classList.remove('marked')
+        }
+        })
 
     
 
@@ -147,7 +81,7 @@ function renderTableRow(tablebody,writerRow){
     
     createTableCell("td",writerRow.mu,trd)
     
-    if(writerRow.szerzo2 !== "" && writerRow.mu2 !== ""){
+    if(writerRow.szerzo2 && writerRow.mu2){
         tdN.rowSpan=2
  
         const tr = document.createElement('tr')
@@ -184,12 +118,12 @@ function createTableCell(cellType,cellContent,parentRow){
  * vegigiteralunk 2 parametert
  * letrehozzuk a fejlec cellakat
  * 
- * @param {HTMLTableElement} table 
+ * @param {HTMLTableElement} parent 
  * @param {string[]} headerList 
  */
-function generateHeader(table,headerList){
+function generateHeader(parent,headerList){
     const thead=document.createElement("thead")
-    table.appendChild(thead)
+    parent.appendChild(thead)
 
     const tr= document.createElement("tr")
     thead.appendChild(tr)
@@ -201,32 +135,29 @@ function generateHeader(table,headerList){
 
 function htmlEventListener(e){
     e.preventDefault()
-
         /** @type {HTMLFormElement} */
         const targetdefault= e.target
         
         /** @type {HTMLInputElement} */   
         const nemz=targetdefault.querySelector("#nemzetiseg")
-        /** @type {string} */
-        const n=nemz.value
-
         /** @type {HTMLInputElement} */
         const sz1=targetdefault.querySelector("#szerzo1")
-        /** @type {string} */
-        const s=sz1.value
-
         /** @type {HTMLInputElement} */
         const mu1=targetdefault.querySelector("#mu1")
-        /** @type {string} */
-        const m=mu1.value
-
         /** @type {HTMLInputElement} */
         const sz2=targetdefault.querySelector("#szerzo2")
-        /** @type {string} */
-        const sz=sz2.value
-
         /** @type {HTMLInputElement} */
         const mu2=targetdefault.querySelector("#mu2")
+
+
+        /** @type {string} */
+        const n=nemz.value
+        /** @type {string} */
+        const s=sz1.value
+        /** @type {string} */
+        const m=mu1.value
+        /** @type {string} */
+        const sz=sz2.value
         /** @type {string} */
         const mu=mu2.value
 
@@ -238,8 +169,8 @@ function htmlEventListener(e){
         obj.szerzo2=sz
         obj.mu2=mu
 
-        arr.push(obj);
-        renderTableBody(arr);
+        const tabbody= document.getElementById("tabbody")
+        renderTableRow(tabbody,obj)
 }
 
 
@@ -254,23 +185,34 @@ function validateFields(a,b,c){
     let valid=true
     if(a.value==""){
         const felmeno1=a.parentElement
-        felmeno1.querySelector(".error")
-        felmeno1.innerText="kotelezo"
+        const felm=felmeno1.querySelector(".error")
+        felm.innerText="kotelezo"
         valid=false
     }
-    else if(b.value==""){
+    if(b.value==""){
         const felmeno2=b.parentElement
-        felmeno2.querySelector(".error")
-        felmeno2.innerText="kotelezo"
+        const felm=felmeno2.querySelector(".error")
+        felm.innerText="kotelezo"
         valid=false
     }
-    else{
+    if(c.value==""){
         const felmeno3=c.parentElement
-        felmeno3.querySelector(".error")
-        felmeno3.innerText="kotelezo"
+        const felm=felmeno3.querySelector(".error")
+        felm.innerText="kotelezo"
         valid=false
     }
 
     return valid
 }
 
+//Létrehoztunk egy függvényt, ami egy string id paraméter és egy tömb segítségével létrehoz nekünk egy formot és visszatér vele. 
+// Mivel korábban már létrehoztunk függvényeket az egyes elemek létrehozásához, ezért látjuk, hogy az egyes elemek csak a label szövegében különböznek egymástól,
+// valamint az id-ban. Így a tömbünk olyan elemeket kell tartalmazzon amiknek van egy label, illetve egy id tulajdonságot.
+// A függvényben végigiteráltunk a tömbön és létrehoztuk az input elemeket. A ciklus után létrehoztunk még egy gombot, amit a formhoz fűztünk, 
+// majd visszatért a létrehozott form elemmel.
+
+function alma(stringid){
+    const obj={}          
+    
+}
+ 
