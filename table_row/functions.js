@@ -1,71 +1,30 @@
-/**
- * @typedef {{nemzet:string,szerzo:string,mu:string,szerzo2?:string,mu2?:string}} CountryWriters
- */
+/** @param {CountryWriters} array */
+function renderTableBody(arr){
+    tbody.id='tabbody'
+    const tabBody= document.getElementById('tabbody')
+    tabBody.innerHTML=''
 
-
-const a={ 
-
-}
-const b =3
-if(b>5){
-    a.name="nev"
-}
-else{
-    a["name"]="nev"
-}
-console.log(a)
-console.log(a["name"])
-console.log(a.name)
-//---------------------------------------------------------
-/** @type {CountryWriters[]} */
-const arr0 =[
-    {//tr1
-        nemzet:'Orosz',
-        szerzo:'Gogol',
-        mu:'A köpönyeg',
-        szerzo2:'Csehov',
-        mu2:'A csinovnyik halála',
-    },
-    {//tr3
-        nemzet:'Cseh',
-        szerzo:'Franz Kafka',
-        mu:'Az átváltozás',
-    },
-    {//tr4
-        nemzet:'Magyar',
-        szerzo:'Örkény István',
-        mu:'Egyperces Novellák',
-        szerzo2:'József Attila',
-        mu2:'Klárisok',
-    },
-    {//tr6
-        nemzet:'Svájc',
-        szerzo:'Friedrich Dürrenmatt',
-        mu:'A fizikusok',
-    }
-]
-//----------------------------------------------------
-const table = document.createElement('table')
-document.body.appendChild(table)
- 
-generateHeader(table,["Nemzetiseg","Szerzo","Mu"])
- 
-const tbody1 = document.createElement('tbody')
-table.appendChild(tbody1)
- 
-
-for(const k of arr0){
+for(const k of arr){
    
     const trd = document.createElement('tr')
-    tbody1.appendChild(trd)  
+    tabBody.appendChild(trd)  
     
     const tdN = document.createElement('td')
     tdN.innerText=k.nemzet
     trd.appendChild(tdN)
  
     tdN.addEventListener('click',function (e){
-        
- 
+        /**@type {HTMLTableCellElement} */
+        const target=e.target
+        const tr= target.parentElement
+        const tbody= tr.parentElement
+        const results=tbody.querySelector(".marked")
+
+        if(results){
+            results.classList.remove('marked')
+        }
+
+        target.classList.add('marked')
     })
  
     
@@ -77,11 +36,11 @@ for(const k of arr0){
     tdM.innerText=k.mu
     trd.appendChild(tdM)
     
-    if(k.szerzo2 !== undefined && k.mu2 !== undefined){
+    if(k.szerzo2 !== "" && k.mu2 !== ""){
         tdN.rowSpan=2
  
         const tr = document.createElement('tr')
-        tbody1.appendChild(tr)
+        tabBody.appendChild(tr)
  
         const tdSz2 = document.createElement('td')
         tdSz2.innerText=k.szerzo2
@@ -92,74 +51,7 @@ for(const k of arr0){
         tr.appendChild(tdM2)
     }
 }
-
-
-//----------------orai+hf--------------------------------------
-//-------------------------------------------------------------
-const tbody= document.createElement("tbody")
-
-
-renderTableRow(arr,obj)
-
-// /**@type {CountryWriters[]} */
-// const arr =[]
-
-
-// /** @param {CountryWriters} array */
-// function renderTableBody(arr){
-//     tbody.id='tabbody'
-//     const tabBody= document.getElementById('tabbody')
-//     tabBody.innerHTML=''
-
-// for(const k of arr){
-   
-//     const trd = document.createElement('tr')
-//     tabBody.appendChild(trd)  
-    
-//     const tdN = document.createElement('td')
-//     tdN.innerText=k.nemzet
-//     trd.appendChild(tdN)
- 
-//     tdN.addEventListener('click',function (e){
-//         /**@type {HTMLTableCellElement} */
-//         const target=e.target
-//         const tr= target.parentElement
-//         const tbody= tr.parentElement
-//         const results=tbody.querySelector(".marked")
-
-//         if(results){
-//             results.classList.remove('marked')
-//         }
-
-//         target.classList.add('marked')
-//     })
- 
-    
-//     const tdSz = document.createElement('td')
-//     tdSz.innerText=k.szerzo
-//     trd.appendChild(tdSz)
-    
-//     const tdM = document.createElement('td')
-//     tdM.innerText=k.mu
-//     trd.appendChild(tdM)
-    
-//     if(k.szerzo2 !== "" && k.mu2 !== ""){
-//         tdN.rowSpan=2
- 
-//         const tr = document.createElement('tr')
-//         tabBody.appendChild(tr)
- 
-//         const tdSz2 = document.createElement('td')
-//         tdSz2.innerText=k.szerzo2
-//         tr.appendChild(tdSz2)
-
-//         const tdM2 = document.createElement('td')
-//         tdM2.innerText=k.mu2
-//         tr.appendChild(tdM2)
-//     }
-// }
-// }
-//---------------------------------------------------------------------
+}
 
 /** @type {HTMLFormElement} */
 const jsform=document.getElementById("jsform")
@@ -210,7 +102,31 @@ jsform.addEventListener("submit",
 )
 renderTableBody(arr);
 
+function createBr(parent){
+    const br=document.createElement("br")
+    parent.appendChild(br)
+}
 
+function createFormElement(form,labeltxt,id){
+    const label=document.createElement("label")
+    label.innerText=id
+    form.appendChild(labeltxt)
+
+    createBr(div)
+
+    const input=document.createElement("input")
+    input.type="test"
+    label.id=id
+    form.appendChild(input)
+
+    createBr(div)
+    createBr(div)
+
+    const span=document.createElement("span")
+    span.classList.add("error")
+    span.appendChild(div)
+
+}
 
 /**
  * @param {HTMLSelectElement} tablebody 
@@ -324,4 +240,24 @@ function htmlEventListener(e){
 
         arr.push(obj);
         renderTableBody(arr);
+}
+
+
+/**
+ * 
+ * @param {HTMLInputElement} a 
+ * @param {HTMLInputElement} b 
+ * @param {HTMLInputElement} c 
+ * @returns {boolean}
+ */
+function validateFields(a,b,c){
+    let valid=true
+    if(a.value==""){
+        prevent(e)
+        querySelector(".ev")
+        innerText
+        valid=faé
+    }
+
+    return valid
 }
