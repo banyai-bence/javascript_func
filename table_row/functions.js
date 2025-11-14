@@ -253,11 +253,24 @@ function htmlEventListener(e){
 function validateFields(a,b,c){
     let valid=true
     if(a.value==""){
-        prevent(e)
-        querySelector(".ev")
-        innerText
-        valid=faé
+        const felmeno1=a.parentElement
+        felmeno1.querySelector(".error")
+        felmeno1.innerText="kotelezo"
+        valid=false
+    }
+    else if(b.value==""){
+        const felmeno2=b.parentElement
+        felmeno2.querySelector(".error")
+        felmeno2.innerText="kotelezo"
+        valid=false
+    }
+    else{
+        const felmeno3=c.parentElement
+        felmeno3.querySelector(".error")
+        felmeno3.innerText="kotelezo"
+        valid=false
     }
 
     return valid
 }
+
