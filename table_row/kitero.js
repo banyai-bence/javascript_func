@@ -1,8 +1,3 @@
-/**
- * @typedef {{nemzet:string,szerzo:string,mu:string,szerzo2?:string,mu2?:string}} CountryWriters
- */
-
-
 const a={ 
 
 }
@@ -45,34 +40,15 @@ const arr0 =[
     }
 ]
 //----------------------------------------------------
-const table = document.createElement('table')
-document.body.appendChild(table)
- 
-generateHeader(table,["Nemzetiseg","Szerzo","Mu"])
- 
-const tbody1 = document.createElement('tbody')
-table.appendChild(tbody1)
-tbody1.id='tabbody'
+
+generateTable("tabbodyjs",["Nemzetiseg","Szerzo","Mu"])
 
 renderTableBody(arr0)
 
-const htmlform=document.getElementById('form')
+//17
+const htmlform=document.getElementById('htmlform')
 
 
-/** @type {HTMLFormElement} */
-const jsform=document.createElement("form")
-jsform.id="jsform"
-document.body.appendChild(jsform)
-
-createFormElement(jsform,"Nemzetiség:","jsnemzetiseg")
-createFormElement(jsform,"Szerző:","jsszerzo1")
-createFormElement(jsform,"Mű:","jsmu1")
-createFormElement(jsform,"Másik Szerző:","jsszerzo2")
-createFormElement(jsform,"Mű:","jsmu2")
-
-const button=document.createElement("button")
-button.innerText="hozzáadás"
-jsform.appendChild(button)
 
 htmlform.addEventListener("submit", htmlEventListener)
 
@@ -95,6 +71,7 @@ jsform.addEventListener("submit",
         const mu2=targetdefault.querySelector("#jsmu2")
 
 
+if(validateFields(nemz,sz1,mu1)){     
         /** @type {string} */
         const n=nemz.value
         /** @type {string} */
@@ -114,8 +91,12 @@ jsform.addEventListener("submit",
         obj.szerzo2=sz
         obj.mu2=mu
 
+
+
+        //---------------------------------------------------------
         arr0.push(obj);
         renderTableBody(arr0);
+}
 })
 
 

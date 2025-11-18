@@ -1,13 +1,7 @@
-/** @param {CountryWriters} array */
-function renderTableBody(arr){
-    const tabBody= document.getElementById('tabbody')
-    tabBody.innerHTML=''
+/**
+ * @typedef {{nemzet:string,szerzo:string,mu:string,szerzo2?:string,mu2?:string}} CountryWriters
+ */
 
-for(const k of arr){
-   
-    renderTableRow(tabBody,k)
-}
-}
 
 /**
  * 
@@ -45,52 +39,13 @@ function createFormElement(form,labeltxt,id){
     span.classList.add("error")
 
     createBr(div)
-    createBr(div)
-
     div.appendChild(span)
-
+    createBr(div)
 }
 
-/**
- * @param {HTMLSelectElement} tablebody 
- * @param {CountryWriters} writerRow
- */
-function renderTableRow(tablebody,writerRow){
-    const trd = document.createElement('tr')
-    tablebody.appendChild(trd) 
+function formCreator(){
 
-    tdN=createTableCell("td",writerRow.nemzet,trd)
- 
-    tdN.addEventListener('click',function (e){
-        /**@type {HTMLTableCellElement} */
-        const target=e.target
-        target.classList.add('marked')
 
-        const ba =target.parentElement.parentElement
-
-        const result =ba.querySelector('marked')
-
-        if(result){
-            result.classList.remove('marked')
-        }
-        })
-
-    
-
-    createTableCell("td",writerRow.szerzo,trd)
-    
-    createTableCell("td",writerRow.mu,trd)
-    
-    if(writerRow.szerzo2 && writerRow.mu2){
-        tdN.rowSpan=2
- 
-        const tr = document.createElement('tr')
-        tablebody.appendChild(tr)
- 
-        createTableCell("td",writerRow.szerzo2,tr)
-
-        createTableCell("td",writerRow.mu2,tr)
-    }
 }
 
 /**
@@ -111,6 +66,58 @@ function createTableCell(cellType,cellContent,parentRow){
 }
 
 /**
+ * @param {HTMLSelectElement} tablebody 
+ * @param {CountryWriters} writerRow
+ */
+function renderTableRow(tablebody,writerRow){
+    const trd = document.createElement('tr')
+    tablebody.appendChild(trd) 
+
+    tdN=createTableCell("td",writerRow.nemzet,trd)
+ 
+    tdN.addEventListener('click',function (e){
+        /**@type {HTMLTableCellElement} */
+        const target=e.target
+        const ba =target.parentElement.parentElement
+
+        const result =ba.querySelector('.marked')
+
+        if(result){
+            result.classList.remove('marked')
+        }
+        target.classList.add("marked")
+        })
+
+    
+
+    createTableCell("td",writerRow.szerzo,trd)
+    
+    createTableCell("td",writerRow.mu,trd)
+    
+    if(writerRow.szerzo2 && writerRow.mu2){
+        tdN.rowSpan=2
+ 
+        const tr = document.createElement('tr')
+        tablebody.appendChild(tr)
+ 
+        createTableCell("td",writerRow.szerzo2,tr)
+
+        createTableCell("td",writerRow.mu2,tr)
+    }
+}
+
+/** @param {CountryWriters} array */
+function renderTableBody(arr){
+    const tabBody= document.getElementById('tabbodyjs')
+    tabBody.innerHTML=''
+
+for(const k of arr){
+   
+    renderTableRow(tabBody,k)
+}
+}
+
+/**
  * letrehozunk egy theadet
  * hozzacsat table
  * letrehozunk egy sort
@@ -122,6 +129,7 @@ function createTableCell(cellType,cellContent,parentRow){
  * @param {string[]} headerList 
  */
 function generateHeader(parent,headerList){
+
     const thead=document.createElement("thead")
     parent.appendChild(thead)
 
@@ -173,7 +181,6 @@ function htmlEventListener(e){
         renderTableRow(tabbody,obj)
 }
 
-
 /**
  * 
  * @param {HTMLInputElement} a 
@@ -181,28 +188,46 @@ function htmlEventListener(e){
  * @param {HTMLInputElement} c 
  * @returns {boolean}
  */
-function validateFields(a,b,c){
+function validateField(input, txt){
     let valid=true
-    if(a.value==""){
-        const felmeno1=a.parentElement
+    if(input.value==""){
+        const felmeno1=input.parentElement
         const felm=felmeno1.querySelector(".error")
-        felm.innerText="kotelezo"
+        felm.innerText=txt
         valid=false
     }
-    if(b.value==""){
-        const felmeno2=b.parentElement
-        const felm=felmeno2.querySelector(".error")
-        felm.innerText="kotelezo"
-        valid=false
-    }
-    if(c.value==""){
-        const felmeno3=c.parentElement
-        const felm=felmeno3.querySelector(".error")
-        felm.innerText="kotelezo"
-        valid=false
-    }
-
     return valid
+}
+
+/**
+ * 
+ * @param {HTMLInputElement} inputelement1 
+ * @param {HTMLInputElement} inputelement2 
+ * @param {HTMLInputElement} inputelement3 
+ * @returns 
+ */
+function validateFields(inputelement1,inputelement2,inputelement3){
+    let valid=true
+    if(validateField(inputelement1, "kötelező")==false){valid=false}
+    if(validateField(inputelement2, "kötelező")==false){valid=false}
+    if(validateField(inputelement3, "kötelező")==false){valid=false}
+    return valid
+}
+
+/**
+ * 
+ * @param {string} tabbodyid 
+ * @param {string[]} header 
+ */
+function generateTable(tabbodyid, header){
+    const table= document.createElement("table")
+    document.body.appendChild(table)
+
+    generateHeader(table, header)
+
+    const tbody= document.createElement("tbody")
+    table.appendChild(tbody)
+    tbody.id=tabbodyid
 }
 
 //Létrehoztunk egy függvényt, ami egy string id paraméter és egy tömb segítségével létrehoz nekünk egy formot és visszatér vele. 
@@ -210,9 +235,3 @@ function validateFields(a,b,c){
 // valamint az id-ban. Így a tömbünk olyan elemeket kell tartalmazzon amiknek van egy label, illetve egy id tulajdonságot.
 // A függvényben végigiteráltunk a tömbön és létrehoztuk az input elemeket. A ciklus után létrehoztunk még egy gombot, amit a formhoz fűztünk, 
 // majd visszatért a létrehozott form elemmel.
-
-function alma(stringid){
-    const obj={}          
-    
-}
- 
