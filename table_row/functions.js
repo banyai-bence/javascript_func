@@ -44,6 +44,21 @@ function createFormElement(form,labeltxt,id){
 }
 
 function formCreator(){
+    
+/** @type {HTMLFormElement} */
+const jsform=document.createElement("form")
+jsform.id="jsform"
+document.body.appendChild(jsform)
+
+createFormElement(jsform,"Nemzetiség:","jsnemzetiseg")
+createFormElement(jsform,"Szerző:","jsszerzo1")
+createFormElement(jsform,"Mű:","jsmu1")
+createFormElement(jsform,"Másik Szerző:","jsszerzo2")
+createFormElement(jsform,"Mű:","jsmu2")
+
+const button=document.createElement("button")
+button.innerText="hozzáadás"
+jsform.appendChild(button)
 
 
 }
