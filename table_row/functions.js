@@ -1,5 +1,6 @@
 /**
  * @typedef {{nemzet:string,szerzo:string,mu:string,szerzo2?:string,mu2?:string}} CountryWriters
+ * @typedef {{label:string,input:string}} LabelInpData
  */
 
 
@@ -43,24 +44,24 @@ function createFormElement(form,labeltxt,id){
     createBr(div)
 }
 
-function formCreator(){
-    
-/** @type {HTMLFormElement} */
-const jsform=document.createElement("form")
-jsform.id="jsform"
-document.body.appendChild(jsform)
+/**
+ * 
+ * @param {string} id 
+ * @param {LabelInpData[]} tomb 
+ */
+function formCreator(id,tomb){
+    const jsform=document.createElement("form")
+    jsform.id=id
+    document.body.appendChild(jsform)
 
-createFormElement(jsform,"Nemzetiség:","jsnemzetiseg")
-createFormElement(jsform,"Szerző:","jsszerzo1")
-createFormElement(jsform,"Mű:","jsmu1")
-createFormElement(jsform,"Másik Szerző:","jsszerzo2")
-createFormElement(jsform,"Mű:","jsmu2")
+    for(const elemgeci of tomb){
+        createFormElement(jsform,elemgeci.label,elemgeci.input)
+    }
 
-const button=document.createElement("button")
-button.innerText="hozzáadás"
-jsform.appendChild(button)
-
-
+    const button=document.createElement("button")
+    button.innerText="hozzáadás"
+    jsform.appendChild(button)
+    return jsform
 }
 
 /**
@@ -158,21 +159,23 @@ function generateHeader(parent,headerList){
 
 function htmlEventListener(e){
     e.preventDefault()
+
         /** @type {HTMLFormElement} */
         const targetdefault= e.target
         
         /** @type {HTMLInputElement} */   
-        const nemz=targetdefault.querySelector("#nemzetiseg")
+        const nemz=targetdefault.querySelector("#jsnemzetiseg")
         /** @type {HTMLInputElement} */
-        const sz1=targetdefault.querySelector("#szerzo1")
+        const sz1=targetdefault.querySelector("#jsszerzo1")
         /** @type {HTMLInputElement} */
-        const mu1=targetdefault.querySelector("#mu1")
+        const mu1=targetdefault.querySelector("#jsmu1")
         /** @type {HTMLInputElement} */
-        const sz2=targetdefault.querySelector("#szerzo2")
+        const sz2=targetdefault.querySelector("#jsszerzo2")
         /** @type {HTMLInputElement} */
-        const mu2=targetdefault.querySelector("#mu2")
+        const mu2=targetdefault.querySelector("#jsmu2")
 
 
+if(validateFields(nemz,sz1,mu1)){     
         /** @type {string} */
         const n=nemz.value
         /** @type {string} */
@@ -184,23 +187,34 @@ function htmlEventListener(e){
         /** @type {string} */
         const mu=mu2.value
 
+
         /** @type {CountryWriters} */
-        const obj={}          
+        const obj={} 
+
         obj.nemzet=n
         obj.szerzo=s
         obj.mu=m
-        obj.szerzo2=sz
-        obj.mu2=mu
 
+        sz == "" ? obj.szerzo2 = undefined : obj.szerzo2 = sz
+        mu == "" ? obj.mu2 = undefined : obj.mu2 = mu
+
+
+        //---------------------------------------------------------
         const tabbody= document.getElementById("tabbody")
+        
         renderTableRow(tabbody,obj)
+
+        console.log(obj)
+    }
+
+        
+        
 }
 
 /**
  * 
- * @param {HTMLInputElement} a 
- * @param {HTMLInputElement} b 
- * @param {HTMLInputElement} c 
+ * @param {HTMLInputElement} input 
+ * @param {string} txt 
  * @returns {boolean}
  */
 function validateField(input, txt){
@@ -211,6 +225,13 @@ function validateField(input, txt){
         felm.innerText=txt
         valid=false
     }
+    else{
+        const felmeno1=input.parentElement
+        hiba =felmeno1.querySelectorAll(".error")
+        for(const h of hiba){
+            h.innerText=""
+        }
+    }
     return valid
 }
 
@@ -219,7 +240,7 @@ function validateField(input, txt){
  * @param {HTMLInputElement} inputelement1 
  * @param {HTMLInputElement} inputelement2 
  * @param {HTMLInputElement} inputelement3 
- * @returns 
+ * @returns {boolean}
  */
 function validateFields(inputelement1,inputelement2,inputelement3){
     let valid=true

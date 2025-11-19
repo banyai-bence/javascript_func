@@ -11,6 +11,8 @@ else{
 console.log(a)
 console.log(a["name"])
 console.log(a.name)
+
+
 //---------------------------------------------------------
 /** @type {CountryWriters[]} */
 const arr0 =[
@@ -45,17 +47,50 @@ generateTable("tabbodyjs",["Nemzetiseg","Szerzo","Mu"])
 
 renderTableBody(arr0)
 
-//17
+/**
+ * @type {HTMLFormElement}
+ */
 const htmlform=document.getElementById('htmlform')
 
-
+//-------------------------------------------------------
+/**
+ * @type {LabelInpData[]}
+ */
+const labelinputformarr=[
+    {
+        label: "Nemzetiség:",
+        input: "jsnemzetiseg",
+    },
+    {
+        label: "Szerző:",
+        input: "jsszerzo1",
+    },
+    {
+        label: "Mű:",
+        input: "jsmu1",
+    },
+    {
+        label: "Másik Szerző:",
+        input: "jsszerzo2",
+    },
+    {
+        label: "Mű:",
+        input: "jsmu2"
+    }
+]
+ 
+/**
+ * @type {HTMLFormElement}
+ */
+const jsform=formCreator("jsform",labelinputformarr)
 
 htmlform.addEventListener("submit", htmlEventListener)
 
-
 jsform.addEventListener("submit", 
     function (e){
+
         e.preventDefault()
+
         /** @type {HTMLFormElement} */
         const targetdefault= e.target
         
@@ -83,20 +118,23 @@ if(validateFields(nemz,sz1,mu1)){
         /** @type {string} */
         const mu=mu2.value
 
+
         /** @type {CountryWriters} */
-        const obj={}          
+        const obj={} 
+
         obj.nemzet=n
         obj.szerzo=s
         obj.mu=m
-        obj.szerzo2=sz
-        obj.mu2=mu
 
+        sz == "" ? obj.szerzo2 = undefined : obj.szerzo2 = sz
+        mu == "" ? obj.mu2 = undefined : obj.mu2 = mu
 
 
         //---------------------------------------------------------
         arr0.push(obj);
+        console.log(arr0)
         renderTableBody(arr0);
-}
+    }
 })
 
 
