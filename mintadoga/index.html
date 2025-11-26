@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ókor Tudomány</title>
+    <style>
+        table,tr,td,th{
+            border: 1px solid black;
+            border-collapse: collapse;
+            padding: 1px;
+        }
+      
+       .hide{
+            display:none;
+        }
+    </style>
+</head>
+<body>
+
+<div>
+    <label for="tableselector"> js? </label>
+    <input type="checkbox" id="tableselector"> <br><br>
+</div>
+
+<div id="htmlsection" class="hide">
+    <table>
+        <thead>
+            <tr>
+                <th>Ókori település</th>
+                <th>Ágazat</th>
+                <th colspan="2">Példa</th>
+                
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Athén</td>
+                <td>politika</td>
+                <td colspan="2">demokrácia</td>
+                
+            </tr>
+            <tr>
+                <td>Athén</td>
+                <td>tudomány</td>
+                <td colspan="2">filozófia</td>
+               
+            </tr>
+            <tr>
+                <td>Egyiptom</td>
+                <td>mezőgazdaság</td>
+                <td>csatornák</td>
+                <td>gátak</td>
+            </tr>
+            <tr>
+                <td>Spárta</td>
+                <td>neveléstudomány</td>
+                <td colspan="2">agogé</td>
+                
+            </tr>
+            <tr>
+                <td>Spárta</td>
+                <td>harcászat</td>
+                <td>hoplita</td>
+                <td>phalanx</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+<br>
+
+<div id="jssection"></div>
+<script src="kitero.js"></script>
+
+</html>
