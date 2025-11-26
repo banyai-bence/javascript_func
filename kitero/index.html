@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- #region ############## Stilusok ################# -->
+    <style>
+        .section{
+            height: 350px;
+            border: 1px solid rgb(0, 0, 0);
+        }
+
+        .hide{
+            display: none;
+        }
+        .card {
+            width: 200px;
+            height: 50px;
+            padding: 15px;
+            margin: 10px;
+            border-radius: 8px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+            font-family: Arial, sans-serif;
+            color: white;
+        }
+
+        #ferfi {
+            background-color: #007bff; /* blue */
+        }
+
+        #no {
+            background-color: #e83e8c; /* pink */
+        }
+
+        #egyeb{
+            background-color: rgb(100, 100, 62);
+        }
+    </style>
+    <!-- #endregion -->
+</head>
+<body>
+    
+    <!-- #region ############## Lenyilo elem ################# -->
+    <div class="section">
+        <h2>Lenyíló menü</h2>
+        <label for="htmldropdown">Kártyaválasztó</label>
+        <select id="htmldropdown">
+            <option value="" hidden>Válassz elemet!</option>
+            <option value="ferfi" >Férfi</option>
+            <option value="no" >Nő</option>
+            <option value="egyeb" >Egyéb</option>
+        </select>
+        <div id="ferfi" class="card hide">
+            <div>Név: John Doe</div>
+            <div>Életkor: 17</div>
+        </div>
+        <div id="no" class="card hide">
+            <div>Név: Jahne Doe</div>
+            <div>Életkor: 19</div>
+        </div>
+    </div>
+    <!-- #endregion -->
+    
+    <!-- #region ############## Jelolo negyzet ################# -->
+    <div class="section">
+        <h2>Jelölő négyzet</h2>
+        <label for="htmlcheckbox">Férfi?</label>
+        <input type="checkbox" id="htmlcheckbox" checked/>
+        <div id="ferfi" class="card hide">
+            <div>Név: John Doe</div>
+            <div>Életkor: 17</div>
+        </div>
+        <div id="no" class="card hide">
+            <div>Név: Jahne Doe</div>
+            <div>Életkor: 19</div>
+        </div>
+    </div>
+    <!-- #endregion -->
+    <script src="kitero.js"></script>
+</body>
+</html>
