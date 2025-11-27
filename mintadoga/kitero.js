@@ -34,16 +34,9 @@ const checkbox = document.getElementById("tableselector")
 const jssection = document.getElementById("jssection")
 const htmlsection = document.getElementById("htmlsection")
 
-function visibility(check){
-    if(check.checked){
+toggletable()
 
-    }
-}
-
-
-checkbox.addEventListener("change", function(e){
-
-})
+checkbox.addEventListener("change", toggletable)
 
 //tablazat letrehozasa
 const table = document.createElement("table")
@@ -104,6 +97,26 @@ for(const elem of arr){
         td5.innerText= elem.pelda2
     }
 }
+
+generateBr(div)
+
+//urlap letrehozasa
+const form= document.createElement("form")
+div.appendChild(form)
+form.id="jsform"
+
+//mezok letrehozasa
+generateFormDiv(form,"Ókori település","elso","telepules")
+generateFormDiv(form,"Ágazat1","masodik","agazat1")
+generateFormDiv(form,"Példa1","harmadik","pelda1")
+generateFormDiv(form,"Ágazat2","negyedik","agazat2")
+generateFormDiv(form,"Példa2","otodik","pelda2")
+
+//submit gomb
+const submit= document.createElement("input")
+form.appendChild(submit)
+submit.type="submit"
+submit.value="Hozzáadás"
 
 
 
