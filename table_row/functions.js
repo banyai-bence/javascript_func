@@ -271,3 +271,5 @@ function generateTable(tabbodyid, header){
 // valamint az id-ban. Így a tömbünk olyan elemeket kell tartalmazzon amiknek van egy label, illetve egy id tulajdonságot.
 // A függvényben végigiteráltunk a tömbön és létrehoztuk az input elemeket. A ciklus után létrehoztunk még egy gombot, amit a formhoz fűztünk, 
 // majd visszatért a létrehozott form elemmel.
+
+

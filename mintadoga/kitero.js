@@ -64,6 +64,7 @@ for(const elem of header){
 
 //tbody letrehozasa / kitoltese
 const tbody = document.createElement("tbody")
+tbody.id="jsbody"
 table.appendChild(tbody)
 
 for(const elem of arr){
@@ -118,6 +119,88 @@ form.appendChild(submit)
 submit.type="submit"
 submit.value="Hozzáadás"
 
+//html urlap
+const htmlform= document.getElementById("htmlform")
+htmlform.addEventListener("submit", htmlTableAdder)
 
 
+//jsform adder
+const jsform=document.getElementById("jsform")
+jsform.addEventListener("submit", function(e){
+    
+     e.preventDefault()
 
+    /**
+     * @type {HTMLFormElement}
+     */
+    const target=e.target
+    
+    /** @type {HTMLInputElement} */
+    const okor=target.querySelector("#elso")
+    /** @type {HTMLInputElement} */
+    const agazat= target.querySelector("#masodik")
+    /** @type {HTMLInputElement} */
+    const pelda1=target.querySelector("#harmadik")
+    /** @type {HTMLInputElement} */
+    const agazat2= target.querySelector("#negyedik")
+    /** @type {HTMLInputElement} */
+    const pelda2=target.querySelector("#otodik")
+
+    if(validateFields(okor,agazat,pelda1)){
+
+    /** @type {string} */
+    const ok=okor.value
+    /** @type {string} */
+    const ag=agazat.value
+    /** @type {string} */
+    const p1=pelda1.value
+    /** @type {string} */
+    const ag2=agazat2.value
+    /** @type {string} */
+    const p2=pelda2.value
+
+
+    /** @type {OkorObj} */
+    const obj={}
+
+    obj.okor=ok
+    obj.agazat=ag
+    obj.pelda1=p1
+    obj.agazat2=ag2
+    obj.pelda2=p2
+
+    const tr= document.createElement("tr")
+    jsbody.appendChild(tr)
+
+    const td1= document.createElement("td")
+    tr.appendChild(td1)
+    td1.innerText= obj.okor
+
+    const td2= document.createElement("td")
+    tr.appendChild(td2)
+    td2.innerText= obj.agazat
+
+    const td3= document.createElement("td")
+    tr.appendChild(td3)
+    td3.innerText= obj.pelda1
+
+   
+
+    if(obj.agazat2 && obj.pelda2){
+        const tr2= document.createElement("tr")
+        jsbody.appendChild(tr2)
+
+        const td4= document.createElement("td")
+        tr2.appendChild(td4)
+        td4.innerText= obj.agazat2
+
+        const td5=document.createElement("td")
+        tr2.appendChild(td5)
+        td5.innerText= obj.pelda2
+
+        td1.rowSpan= 2
+    }
+    
+    }
+}  
+)
