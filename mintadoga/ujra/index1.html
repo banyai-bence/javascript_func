@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ókor Tudomány</title>
+    <style>
+        table,
+        tr,
+        td,
+        th {
+            border: 1px solid black;
+            border-collapse: collapse;
+            padding: 1px;
+        }
+
+        .hide {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <label for="tableselector">js?</label>
+        <input type="checkbox" name="checkbox" id="tableselector">
+    </div>
+
+    <br>
+
+    <div id="htmlsection" class="hide">
+        <table>
+            <thead>
+                <tr>
+                    <th>Ókori település</th>
+                    <th>Ágazat</th>
+                    <th colspan="2">Példa</th>
+
+                </tr>
+            </thead>
+            <tbody id="htmltbody">
+                <tr>
+                    <td>Athén</td>
+                    <td>politika</td>
+                    <td colspan="2">demokrácia</td>
+
+                </tr>
+                <tr>
+                    <td>Athén</td>
+                    <td>tudomány</td>
+                    <td colspan="2">filozófia</td>
+
+                </tr>
+                <tr>
+                    <td>Egyiptom</td>
+                    <td>mezőgazdaság</td>
+                    <td>csatornák</td>
+                    <td>gátak</td>
+                </tr>
+                <tr>
+                    <td>Spárta</td>
+                    <td>neveléstudomány</td>
+                    <td colspan="2">agogé</td>
+
+                </tr>
+                <tr>
+                    <td>Spárta</td>
+                    <td>harcászat</td>
+                    <td>hoplita</td>
+                    <td>phalanx</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <br>
+
+        <form id="htmlform">
+            <div>
+                <label for="elso">Okori</label><br>
+                <input type="text" id="elso" name="telepules">
+                <span class="error"></span>
+            </div>
+            <br>
+            <div>
+                <label for="masodik">Agazat</label><br>
+                <input type="text" id="masodik" name="agazat">
+                <span class="error"></span>
+            </div>
+            <br>
+            <div>
+                <label for="harmadik">Pelda</label><br>
+                <input type="text" id="harmadik" name="pelda1">
+                <span class="error"></span>
+            </div>
+            <br>
+            <div>
+                <label for="negyedik">Pelda2</label><br>
+                <input type="text" id="negyedik" name="pelda2">
+                <span class="error"></span>
+            </div>
+            <br>
+            <button type="submit">Hozzáadás</button>
+        </form>
+
+    </div>
+
+</body>
+<script src="functions1.js"></script>
+<script src="kitero1.js"></script>
+
+</html>
